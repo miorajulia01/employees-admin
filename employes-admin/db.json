@@ -7,7 +7,7 @@
       "email": "alice@company.com",
       "department": "Informatique",
       "salary": 2800,
-      "active": false
+      "active": true
     },
     {
       "id": 2,
@@ -34,7 +34,7 @@
       "email": "david@company.com",
       "department": "Finance",
       "salary": 3100,
-      "active": false
+      "active": true
     },
     {
       "id": 5,
