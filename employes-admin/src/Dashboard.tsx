@@ -1,14 +1,24 @@
-import { useGetList } from "react-admin";
+import { useGetList, useRedirect } from "react-admin";
 import { Card, CardContent, Typography } from "@mui/material";
 
-const StatCard = ({ title, value }: { title: string; value: number | undefined }) => (
-  <Card style={{ minWidth: 200, margin: 8 }}>
-    <CardContent>
-      <Typography color="textSecondary">{title}</Typography>
-      <Typography variant="h3">{value ?? "..."}</Typography>
-    </CardContent>
-  </Card>
-);
+const StatCard = ({ title, value, path }: { 
+  title: string; 
+  value: number | undefined;
+  path: string;
+}) => {
+  const redirect = useRedirect();
+  return (
+    <Card 
+      style={{ minWidth: 200, margin: 8, cursor: "pointer" }}
+      onClick={() => redirect(path)}
+    >
+      <CardContent>
+        <Typography color="textSecondary">{title}</Typography>
+        <Typography variant="h3">{value ?? "..."}</Typography>
+      </CardContent>
+    </Card>
+  );
+};
 
 export const Dashboard = () => {
   const { total: totalEmployees } = useGetList("employees", {
@@ -30,10 +40,10 @@ export const Dashboard = () => {
     <div style={{ padding: 16 }}>
       <h2>Tableau de bord</h2>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        <StatCard title="Total employés" value={totalEmployees} />
-        <StatCard title="Employés actifs" value={activeEmployees} />
-        <StatCard title="Total stagiaires" value={totalInterns} />
-        <StatCard title="Stagiaires rémunérés" value={remuneratedInterns} />
+        <StatCard title="Total employés" value={totalEmployees} path="/employees" />
+        <StatCard title="Employés actifs" value={activeEmployees} path="/employees" />
+        <StatCard title="Total stagiaires" value={totalInterns} path="/interns" />
+        <StatCard title="Stagiaires rémunérés" value={remuneratedInterns} path="/interns" />
       </div>
     </div>
   );
