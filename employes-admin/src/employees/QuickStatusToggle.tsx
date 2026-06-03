@@ -2,12 +2,15 @@ import { useRecordContext, useUpdate } from "react-admin";
 import { Button } from "@mui/material";
 
 export const QuickStatusToggle = () => {
+  
   const record = useRecordContext();
   const [update, { isPending }] = useUpdate();
 
   if (!record) return null;
 
-  const handleToggle = () => {
+  const handleToggle = (e:React.MouseEvent) => {
+  e.stopPropagation()
+  e.preventDefault()
     update("employees", {
       id: record.id,
       data: { ...record, active: !record.active },
